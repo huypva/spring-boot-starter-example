@@ -9,58 +9,39 @@ The example project for StringBoot service
 ## Project structure
 ```
 .
-├── hello-world
-│   ├── Dockerfile
-│   ...
-├── docker-compose.yaml
+├── spring-boot-starter
+│   ├── src/main/resources/META-INF
+|   |   ├── spring.factories
+|   ├── pom.xml
+|   
+├── spring-boot-sample
+|   ├── src/main/resources
+|   |   ├── application.yml
+|   ├── pom.xml
 |
 └── README.md
 ```
 
-## Prerequisites
-- Make sure that you have Docker and Docker Compose installed
-  - Windows or macOS:
-    [Install Docker Desktop](https://www.docker.com/get-started)
-  - Linux: [Install Docker](https://www.docker.com/get-started) and then
-    [Docker Compose](https://github.com/docker/compose)
-
-## Start infrastructure
+## Build & install project
 
 ```shell script
-$ docker-compose -f ./docker-compose-infrastructure.yml -p spring-boot-infrastructure up -d
-```
-
-## Start services
-### Start services in local
-
-- Build project
-```shell script
-$ ./mvnw clean package
-$ cd hello-word
-$ ../mvnw spring-boot:run
+$ ./mvnw clean install
 ...
 ```
 
-### Start services in docker 
+### Start sample project
 
 ```shell script
-$ docker-compose -f ./docker-compose-service.yml -p spring-boot-service up -d
+$ cd spring-boot-sample
+$ ../mvnw spring-boot:run
 ```
 
-## Run testing
+Log start
+```text
+2021-10-26 11:03:54.852  INFO 4789 --- [           main] i.c.springbootstarter.Application        : No active profile set, falling back to default profiles: default
+2021-10-26 11:03:55.185  INFO 4789 --- [           main] i.c.springbootstarter.Application        : Started Application in 0.58 seconds (JVM running for 0.839)
+Do sample: Sample Value
 
-```shell script
-curl http://localhost:8081/greet?name=World
-```
-
-## Stop project
-
-- Kill project if start in local mode
-- Stop infrastructure & services in docker
-
-```shell script
-$ docker-compose -f ./docker-compose-infrastructure.yml -p spring-boot-infrastructure down
-$ docker-compose -f ./docker-compose-service.yml -p spring-boot-service down
 ```
 
 ## Contribute
